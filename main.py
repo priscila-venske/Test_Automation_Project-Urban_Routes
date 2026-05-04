@@ -8,7 +8,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-
 class TestUrbanRoutes:
     @classmethod
     def setup_class(cls):
@@ -28,53 +27,57 @@ class TestUrbanRoutes:
         self.page = UrbanRoutesPage(self.driver)
 
     def _start_comfort_flow(self):
-        self.page.enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_order_taxi_button()
+        self.page.select_comfort()
 
     def test_set_route(self):
-        self.page._enter_locations(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         assert self.page.get_from_location() == data.ADDRESS_FROM
         assert self.page.get_to_location() == data.ADDRESS_TO
-        time.sleep(10)
-
-
-
-
+        print("Teste de rota: Endereços validados com sucesso.")
+        time.sleep(2)
 
     def test_select_plan(self):
-        # Adicionar em S8
-        print("função criada para selecionar o plano")
-        pass
+        self.page.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
+        self.page.click_order_taxi_button()
+        self.page.select_comfort()
+        time.sleep(1)
+
+        assert self.page.is_comfort_selected() == True
 
     def test_fill_phone_number(self):
-        # Adicionar em S8
-        print("função criada para preencher o número de telefone")
-        pass
+        self._start_comfort_flow()
+        self.page.set_phone(data.PHONE_NUMBER)
+        code = helpers.retrieve_phone_code(self.driver)
+        self.page.set_code(code)
+        time.sleep(10)
 
     def test_fill_card(self):
-        # Adicionar em S8
-        print("função criada para preencher o cartão")
-        pass
+        self._start_comfort_flow()
+        self.page.add_card(data.CARD_NUMBER, data.CARD_CODE)
+        time.sleep(10)
 
     def test_comment_for_driver(self):
-        # Adicionar em S8
-        print("função criada para adicionar comentário para o motorista")
-        pass
+        self._start_comfort_flow()
+        self.page.add_comment(data.MESSAGE_FOR_DRIVER)
+        time.sleep(10)
 
     def test_order_blanket_and_handkerchiefs(self):
-        # Adicionar em S8
-        print("função criada para pedir coberta e lenços")
-        pass
+        self._start_comfort_flow()
+        self.page.select_extras()
+        time.sleep(10)
 
     def test_order_2_ice_creams(self):
+        self._start_comfort_flow()
         number_of_ice_creams = 2
-        for count in range(number_of_ice_creams):
-            # Adicionar em S8
-            print("função criada para adicionar sorvetes")
+        self.page.add_ice_cream(number_of_ice_creams)
+        time.sleep(10)
 
     def test_car_search_model_appears(self):
-        # Adicionar em S8
-        print("função criada para verificar se o modelo do carro aparece na busca")
-        pass
+        self._start_comfort_flow()
+        self.page.order_taxi()
+        time.sleep(10)
 
     @classmethod
     def teardown_class(cls):
