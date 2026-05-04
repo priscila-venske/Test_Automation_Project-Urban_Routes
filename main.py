@@ -36,14 +36,11 @@ class TestUrbanRoutes:
         assert self.page.get_from_location() == data.ADDRESS_FROM
         assert self.page.get_to_location() == data.ADDRESS_TO
         print("Teste de rota: Endereços validados com sucesso.")
-        time.sleep(2)
 
     def test_select_plan(self):
         self.page.set_route(data.ADDRESS_FROM, data.ADDRESS_TO)
         self.page.click_order_taxi_button()
         self.page.select_comfort()
-        time.sleep(1)
-
         assert self.page.is_comfort_selected() == True
 
     def test_fill_phone_number(self):
@@ -51,33 +48,28 @@ class TestUrbanRoutes:
         self.page.set_phone(data.PHONE_NUMBER)
         code = helpers.retrieve_phone_code(self.driver)
         self.page.set_code(code)
-        time.sleep(10)
 
     def test_fill_card(self):
         self._start_comfort_flow()
         self.page.add_card(data.CARD_NUMBER, data.CARD_CODE)
-        time.sleep(10)
+
 
     def test_comment_for_driver(self):
         self._start_comfort_flow()
         self.page.add_comment(data.MESSAGE_FOR_DRIVER)
-        time.sleep(10)
 
     def test_order_blanket_and_handkerchiefs(self):
         self._start_comfort_flow()
         self.page.select_extras()
-        time.sleep(10)
 
     def test_order_2_ice_creams(self):
         self._start_comfort_flow()
         number_of_ice_creams = 2
         self.page.add_ice_cream(number_of_ice_creams)
-        time.sleep(10)
 
     def test_car_search_model_appears(self):
         self._start_comfort_flow()
         self.page.order_taxi()
-        time.sleep(10)
 
     @classmethod
     def teardown_class(cls):

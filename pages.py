@@ -99,7 +99,6 @@ class UrbanRoutesPage:
             plus_button.click()
 
     def order_taxi(self):
-        # 1. Espera o botão existir no HTML
         order_btn = WebDriverWait(self.driver, 15).until(
             EC.presence_of_element_located(self.ORDER_BUTTON)
         )
