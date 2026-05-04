@@ -53,7 +53,6 @@ class TestUrbanRoutes:
         self._start_comfort_flow()
         self.page.add_card(data.CARD_NUMBER, data.CARD_CODE)
 
-
     def test_comment_for_driver(self):
         self._start_comfort_flow()
         self.page.add_comment(data.MESSAGE_FOR_DRIVER)
