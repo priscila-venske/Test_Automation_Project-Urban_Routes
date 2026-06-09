@@ -146,4 +146,15 @@ Test logic (main.py)
 ## Author
  
 Project developed as part of the **QA Engineering Bootcamp** at TripleTen.
+
+---
+
+## Assignment Approved
+[Project Approval](https://drive.google.com/file/d/1-jepxk_nXWAGVjz91o2AK_h_TF_UZQ2n/view?usp=drive_link)
+
+---
+
+## 📄 License
+ 
+This repository is for educational use. The data and screenshots belong to the course's testing environment.
  
